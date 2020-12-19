@@ -1,0 +1,4 @@
+aws sns create-topic --name Lab5
+aws sns subscribe --topic-arn arn:aws:sns:us-east-1:072781008649:Lab5 --protocol email --notification-endpoint revers12321@gmail.com
+aws cloudwatch put-metric-alarm --alarm-name StatusCheck --alarm-description "Lab5" --metric-name HealthyHostCount --namespace AWS/ApplicationELB --statistic Minimum --dimensions Name=LoadBalancer,Value=app/Lab6alb/75e9a523e94c1b21 Name=TargetGroup,Value=targetgroup/Lab6tg/4326a66f5c41c402 --unit Count --period 300 --threshold 2 --evaluation-periods 2 --comparison-operator LessThanThreshold --alarm-actions arn:aws:sns:us-east-1:072781008649:Lab5 
+aws elbv2 deregister-targets --target-group-arn arn:aws:elasticloadbalancing:us-east-1:072781008649:targetgroup/Lab6tg/4326a66f5c41c402 --targets Id=i-0396428d2a9d16da7
